@@ -1,0 +1,49 @@
+.main{
+    width: 60%;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    height: 70vh;
+    margin: auto;
+    margin-top: 80px;
+
+ }
+ .form_main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50vh;
+
+ }
+
+ .form_main form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 50vh;
+   align-items: center;
+ }
+ .form_main .form_Sub_login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 30vh;
+   align-items: center;
+  
+ }
+
+
+.form_main input{
+    width: 75%;
+    border: none;
+  border-bottom: 1px solid blue;
+  border-radius: 0%;
+  margin: auto;
+ 
+}
+.form_main input:focus{
+
+   box-shadow: none;
+ 
+}
+.form_main form p{
+   color: red;
+}
