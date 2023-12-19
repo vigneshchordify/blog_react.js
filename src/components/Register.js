@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+// Importing toastify module
+import { toast, ToastContainer } from "react-toastify";
+
+// Import toastify css file
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -22,7 +27,7 @@ function Register() {
     //data storage
     const [userregister, setUserRegister] = useState('')
 
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, reset,  formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     })
 
@@ -43,16 +48,17 @@ function Register() {
                         setUserRegister(data)
                         reset()
                         console.log(userregister);
-                        alert('success')
-                       
+
+                        toast.success('Registration success')
+
                     }
                     else {
                         console.log("password mismatch");
-                        alert('password mismatch')
+
+                        toast.error('password mismatch')
                     }
 
-
-                })}>
+ })}>
                     <input className='form-control' placeholder='Email' {...register('email')} type='email'></input>
                     <p>{errors.email?.message}</p>
                     <input className='form-control' {...register('name')} placeholder='Name' type='text'></input>
@@ -66,7 +72,7 @@ function Register() {
                     <div className='w-100 mt-3'><a href='/login'>Already have an account? Login</a></div>
                 </form>
             </div>
-
+            <ToastContainer theme='colored' />
         </div>
 
     )
