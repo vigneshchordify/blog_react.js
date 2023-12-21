@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 // Importing toastify module
 import { toast, ToastContainer } from "react-toastify";
+import instance from '../BaseUrl';
 
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
@@ -41,11 +42,26 @@ function Login() {
 
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12 form_main '>
-                    <form className='form_Sub_login' onSubmit={handleSubmit((data) => {
+                    <form className='form_Sub_login' onSubmit={handleSubmit(async (data) => {
                         setUserData(data)
-                        reset()
-                        console.log(userData);
-                        toast.success('Login success')
+
+                        try {
+
+                            const registerresponse = await instance.post('/login', data);
+                            console.log(registerresponse);
+
+                            reset()
+                            console.log(userData);
+                            localStorage.setItem("token", registerresponse.data.token);
+                            toast.success(registerresponse.data.message)
+
+
+
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
+
 
                     })}>
                         <input {...register('email')} className='form-control' placeholder='Email' type='email'></input>

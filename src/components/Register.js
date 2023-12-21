@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import instance from '../BaseUrl';
 // Importing toastify module
 import { toast, ToastContainer } from "react-toastify";
 
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
+
 
 
 
@@ -24,13 +26,16 @@ function Register() {
         confirmpassword: yup.string().min(5).required()
     })
 
+
+
     //data storage
     const [userregister, setUserRegister] = useState('')
 
-    const { register, handleSubmit, reset,  formState: { errors } } = useForm({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     })
 
+    const [userDetails,setUserDetails]=useState({})
 
 
     return (
@@ -42,14 +47,30 @@ function Register() {
 
             </div>
             <div className='col-lg-6 col-md-6 col-sm-12 form_main'>
-                <form className='form_Sub mt-5' onSubmit={handleSubmit((data) => {
+                <form className='form_Sub mt-5' onSubmit={handleSubmit(async (data) => {
+                    console.log(data.email);
+                    setUserDetails({email:data.email,name:data.name,password:data.password})
 
                     if (data.password === data.confirmpassword) {
-                        setUserRegister(data)
-                        reset()
-                        console.log(userregister);
+                        
+                        // reset()
+                       
+                        
 
-                        toast.success('Registration success')
+                        
+                        console.log(userDetails);
+                        try {
+
+                        const registerresponse = await instance.post('/register', data);
+                        console.log(registerresponse);
+
+                        toast.success(registerresponse.data.message)
+
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
+
 
                     }
                     else {
@@ -58,7 +79,7 @@ function Register() {
                         toast.error('password mismatch')
                     }
 
- })}>
+                })}>
                     <input className='form-control' placeholder='Email' {...register('email')} type='email'></input>
                     <p>{errors.email?.message}</p>
                     <input className='form-control' {...register('name')} placeholder='Name' type='text'></input>

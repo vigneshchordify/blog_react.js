@@ -1,0 +1,40 @@
+.accounts_main{
+    width: 75%;
+
+
+}
+.post_container{
+    width: 80%;
+}
+
+.post_container input {
+    width: 50%;
+    border: none;
+    border-bottom: 1px solid blue;
+    border-radius: 0%;
+    margin: auto;
+ 
+ }
+ 
+ .post_container input:focus {
+ 
+    box-shadow: none;
+ 
+ }
+
+ .post_container textarea {
+    width: 50%;
+   
+    border-bottom: 1px solid blue;
+    border-radius: 0%;
+    margin: auto;
+    height: 50vh;
+ 
+ }
+ 
+ .post_container textarea:focus {
+ 
+    box-shadow: none;
+ 
+ }
+ 
