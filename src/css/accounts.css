@@ -4,11 +4,11 @@
 
 }
 .post_container{
-    width: 80%;
+    width: 85%;
 }
 
 .post_container input {
-    width: 50%;
+    width: 85%;
     border: none;
     border-bottom: 1px solid blue;
     border-radius: 0%;
@@ -23,12 +23,12 @@
  }
 
  .post_container textarea {
-    width: 50%;
+    width: 85%;
    
     border-bottom: 1px solid blue;
     border-radius: 0%;
     margin: auto;
-    height: 50vh;
+    height: 30vh;
  
  }
  

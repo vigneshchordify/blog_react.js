@@ -53,7 +53,7 @@ function Register() {
 
                     if (data.password === data.confirmpassword) {
                         
-                        // reset()
+                        reset()
                        
                         
 

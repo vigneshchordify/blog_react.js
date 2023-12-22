@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import '../css/accounts.css'
 import { useForm } from 'react-hook-form'
@@ -9,65 +9,28 @@ import instance from '../BaseUrl';
 import { toast, ToastContainer } from "react-toastify";
 
 
+
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
-import AccountBlogCard from './AccountBlogCard';
 
+function EditBlog() {
 
-function AccountPage() {
-
-  //yup schema
+     //yup schema
   const schema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
     
   })
-
-  const [postState,setPostState]=useState({})
-  const [particularblogs, setParticularBlogs] = useState([]);
-
-
-
-  //data storage
-  const [userregister, setUserRegister] = useState('')
-
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   })
 
-const [token,setToken]=useState()
-
-   const [blogReqDetails,setBlogReqDetails]=useState()
-    useEffect(()=>{
-      setToken(localStorage.getItem('token'))
-        getalldata()
-    },[token])
-
-    const getalldata = async () => {
-        try {
-
-            setBlogReqDetails({token:token,uuid:localStorage.getItem('uuid')})
-          
-          setParticularBlogs(await instance.post('/particularblogs',blogReqDetails))
-          
-          console.log(particularblogs);
-          
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-
-
-
-
-
+  const [postState,setPostState]=useState({})
   return (
     <>
-      <Navbar></Navbar>
-      <div className='accounts_main mx-auto'>
+    <Navbar></Navbar>
 
-        <h3>Hi all</h3>
-        <div className='post_container mt-5'>
+    <div className='post_container mt-5'>
           <h4 className='text-center'>Add new post here</h4>
           <form className='text-center mt-5' onSubmit={handleSubmit(async(data)=>{
           
@@ -100,11 +63,10 @@ const [token,setToken]=useState()
             <button className='btn btn-success w-25 mt-5 ' type='submit'>Submit</button>
           </form>
         </div>
-        <AccountBlogCard particularblogs={particularblogs} />
 
-      </div>
+
     </>
   )
 }
 
-export default AccountPage
+export default EditBlog

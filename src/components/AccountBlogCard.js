@@ -1,20 +1,22 @@
-import React from 'react'
-import '../css/postcard.css'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
-function Postcard(props) {
+function AccountBlogCard(props) {
 
-    const { blogs } = props;
-    if (!blogs || !blogs.data) {
+    const { particularblogs } = props;
+    if (!particularblogs || !particularblogs.data) {
        
         return null; 
     }
    
     
-    const bloglist=blogs.data
+    const bloglist=particularblogs.data
     console.log(bloglist);
-    return (
-        < >
-           
+
+   
+  return (
+    <>
+
 {bloglist.length>0?bloglist.map(i=>(
             <div className='w-75 mx-auto mt-5 card_main ' >
 
@@ -25,6 +27,8 @@ function Postcard(props) {
                             <p class="card-text">{i.description}</p>
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
+                        <Link to={`/blog/edit/${i.id}`}><button className='btn btn-success'>Edit</button></Link>
+                        <button className='btn btn-danger'>Delete</button>
                 </div>
                
 
@@ -32,8 +36,8 @@ function Postcard(props) {
 )):''}
 
 
-        </>
-    )
+    </>
+  )
 }
 
-export default Postcard
+export default AccountBlogCard

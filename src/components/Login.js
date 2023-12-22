@@ -53,6 +53,7 @@ function Login() {
                             reset()
                             console.log(userData);
                             localStorage.setItem("token", registerresponse.data.token);
+                            localStorage.setItem("uuid", registerresponse.data.id);
                             toast.success(registerresponse.data.message)
 
 
