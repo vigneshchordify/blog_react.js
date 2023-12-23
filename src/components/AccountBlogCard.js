@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import instance from '../BaseUrl';
+
 
 function AccountBlogCard(props) {
 
@@ -12,6 +15,25 @@ function AccountBlogCard(props) {
     
     const bloglist=particularblogs.data
     console.log(bloglist);
+
+    const deleteBlog=async(id)=>{
+
+        console.log(id);
+        try {
+            const response = await instance.get(`/deleteBlog/${id}`);
+            const data = response;
+            console.log(data);
+            
+          } catch (error) {
+            console.error('Error fetching post:', error);
+            // You can display an error toast here if needed
+            toast.error('Error fetching post');
+          }
+
+
+
+
+    }
 
    
   return (
@@ -28,7 +50,7 @@ function AccountBlogCard(props) {
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
                         <Link to={`/blog/edit/${i.id}`}><button className='btn btn-success'>Edit</button></Link>
-                        <button className='btn btn-danger'>Delete</button>
+                        <button className='btn btn-danger' onClick={()=>deleteBlog(i.id)} >Delete</button>
                 </div>
                
 
