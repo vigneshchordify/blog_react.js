@@ -6,9 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import instance from '../BaseUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 function EditBlog() {
+
+  const navigate = useNavigate()
   const schema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
@@ -33,7 +36,7 @@ function EditBlog() {
         setSingleBlogData(data);
       } catch (error) {
         console.error('Error fetching post:', error);
-        // You can display an error toast here if needed
+
         toast.error('Error fetching post');
       }
     };
@@ -62,11 +65,23 @@ function EditBlog() {
                 const registerResponse = await instance.post('/updateblog', postState);
                 console.log(registerResponse);
 
-                toast.success(registerResponse.data.message);
+
+                if (registerResponse.data.message == 'Post updated successfully') {
+
+                  toast.success(registerResponse.data.message);
+                  setTimeout(() => {
+                    navigate('/')
+
+                    navigate('/accounts')
+
+                  }, 2000)
+
+
+                }
               } catch (err) {
                 console.log(err);
-                // Display an error toast if the backend request fails
-                toast.error('Error updating post');
+
+
               }
             })}
           >

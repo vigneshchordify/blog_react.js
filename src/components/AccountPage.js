@@ -7,14 +7,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import instance from '../BaseUrl';
 // Importing toastify module
 import { toast, ToastContainer } from "react-toastify";
-
-
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
 import AccountBlogCard from './AccountBlogCard';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function AccountPage() {
+
+  const navigate=useNavigate()
 
   //yup schema
   const schema = yup.object().shape({
@@ -66,8 +68,8 @@ const [token,setToken]=useState()
       <Navbar></Navbar>
       <div className='accounts_main mx-auto'>
 
-        <h3>Hi all</h3>
-        <div className='post_container mt-5'>
+       
+        <div className='post_container mt-5 mx-auto'>
           <h4 className='text-center'>Add new post here</h4>
           <form className='text-center mt-5' onSubmit={handleSubmit(async(data)=>{
           
@@ -82,8 +84,15 @@ const [token,setToken]=useState()
 
               const registerresponse = await instance.post('/postblog', postState);
               console.log(registerresponse);
+              if(registerresponse.data.message=='post added successfully'){
+                toast.success(registerresponse.data.message)
+                navigate('/accounts')
 
-              toast.success(registerresponse.data.message)
+                
+
+              }
+
+              
 
               }
               catch (err) {
@@ -103,6 +112,7 @@ const [token,setToken]=useState()
         <AccountBlogCard particularblogs={particularblogs} />
 
       </div>
+      <ToastContainer/>
     </>
   )
 }

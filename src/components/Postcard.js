@@ -1,39 +1,42 @@
-import React from 'react'
-import '../css/postcard.css'
+// Postcard.js
+import React from 'react';
+import '../css/postcard.css';
 
 function Postcard(props) {
+  const { blogs } = props;
 
-    const { blogs } = props;
-    if (!blogs || !blogs.data) {
-       
-        return null; 
-    }
-   
-    
-    const bloglist=blogs.data
-    console.log(bloglist);
-    return (
-        < >
-           
-{bloglist.length>0?bloglist.map(i=>(
-            <div className='w-75 mx-auto mt-5 card_main ' >
+  if (!blogs || !blogs.data) {
+    return null;
+  }
 
-                <div class="card mb-3  ">
-                    <h5>{i.name}</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">{i.title}</h5>
-                            <p class="card-text">{i.description}</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                </div>
-               
+  const bloglist = blogs.data;
 
+  return (
+    <>
+      {bloglist.length > 0 ? (
+        bloglist.map((blog) => (
+          <div className='w-75 mx-auto mt-5 card_main' key={blog.id}>
+            <div className='card mb-3 custom-card'>
+              <div className='card-body'>
+                <h5 className='card-title'>{blog.title}</h5>
+                <p className='card-text'>{blog.description}</p>
+                <p className='card-text'>
+                  <small className='text-muted'>Last updated 3 mins ago</small>
+                </p>
+              </div>
+              <div className='card-footer'>
+                <h5>
+                  <span>Written by</span> {blog.name}
+                </h5>
+              </div>
             </div>
-)):''}
-
-
-        </>
-    )
+          </div>
+        ))
+      ) : (
+        ''
+      )}
+    </>
+  );
 }
 
-export default Postcard
+export default Postcard;

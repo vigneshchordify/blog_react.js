@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -16,6 +17,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function Register() {
+
+    //navigation
+   const navigate=useNavigate()
 
 
     //yup schema
@@ -63,8 +67,22 @@ function Register() {
 
                         const registerresponse = await instance.post('/register', data);
                         console.log(registerresponse);
+                        if(registerresponse.data.message=='registration successfull'){
+                            toast.success(registerresponse.data.message)
+                           
+                            setTimeout(()=>{
+                                navigate('/login')
 
-                        toast.success(registerresponse.data.message)
+                            },5000)
+
+
+                        }
+                        else{
+                            toast.error(registerresponse.data.message)
+
+                        }
+
+                        
 
                         }
                         catch (err) {

@@ -9,6 +9,8 @@ import instance from '../BaseUrl';
 
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -22,7 +24,8 @@ function Login() {
     })
 
 
-
+    //navigation
+    const navigate = useNavigate()
 
     //validation
 
@@ -49,12 +52,25 @@ function Login() {
 
                             const registerresponse = await instance.post('/login', data);
                             console.log(registerresponse);
+                            if (registerresponse.data.message == 'login success') {
+                                localStorage.setItem("token", registerresponse.data.token);
+                                localStorage.setItem("uuid", registerresponse.data.id);
+                                toast.success(registerresponse.data.message)
+                                reset()
+                                console.log(userData);
+                                setTimeout(() => {
+                                    navigate('/')
 
-                            reset()
-                            console.log(userData);
-                            localStorage.setItem("token", registerresponse.data.token);
-                            localStorage.setItem("uuid", registerresponse.data.id);
-                            toast.success(registerresponse.data.message)
+                                }, 5000)
+
+                            }
+                            else {
+                                toast.error(registerresponse.data.message)
+
+                            }
+
+
+
 
 
 
