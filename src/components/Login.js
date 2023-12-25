@@ -52,7 +52,7 @@ function Login() {
       <div className='main row'>
         <h2 className='text-center'>Login</h2>
         <div className='col-lg-6 col-md-6 col-sm-12'>
-          <img src='https://i.postimg.cc/j2NdBRk5/customer-experience-creative-collage.jpg' style={{height:'100%'}} className='w-100' alt='Login Image'></img>
+          <img src='https://i.postimg.cc/X79YTtrP/19197307.jpg' style={{height:'100%'}} className='w-100' alt='Login Image'></img>
         </div>
         <div className='col-lg-6 col-md-6 col-sm-12 form_main '>
           <form className='form_Sub_login' onSubmit={handleSubmit(handleLogin)}>
