@@ -22,7 +22,7 @@ function Navbar() {
                 localStorage.removeItem('uuid');
                 navigate('/');
               }}>Sign Out</button>
-              <Link to="/accounts" className='btn'>Private Page</Link>
+              <Link to="/accounts" className='btn'>Personal Blog </Link>
             </div>
           }
         </div>

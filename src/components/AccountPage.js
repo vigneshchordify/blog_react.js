@@ -11,6 +11,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AccountBlogCard from './AccountBlogCard';
 import { useNavigate } from 'react-router-dom';
+import API from '../Api';
+
 
 
 
@@ -52,7 +54,8 @@ const [token,setToken]=useState()
           
           setParticularBlogs(await instance.post('/particularblogs',blogReqDetails))
           
-          console.log(particularblogs);
+          
+         
           
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -78,7 +81,7 @@ const [token,setToken]=useState()
               description:data.description,
               uuid:localStorage.getItem('uuid'),
               token:localStorage.getItem('token')
-            })
+            })  
             console.log(postState);
             try {
 
@@ -86,6 +89,7 @@ const [token,setToken]=useState()
               console.log(registerresponse);
               if(registerresponse.data.message=='post added successfully'){
                 toast.success(registerresponse.data.message)
+                reset()
                 navigate('/accounts')
 
                 

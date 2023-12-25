@@ -21,12 +21,12 @@ function Postcard(props) {
                 <h5 className='card-title'>{blog.title}</h5>
                 <p className='card-text'>{blog.description}</p>
                 <p className='card-text'>
-                  <small className='text-muted'>Last updated 3 mins ago</small>
+                  <small className='text-muted'>Last updated at {blog.updatedAt}</small>
                 </p>
               </div>
               <div className='card-footer'>
                 <h5>
-                  <span>Written by</span> {blog.name}
+                  <span>Author</span> {blog.name}
                 </h5>
               </div>
             </div>

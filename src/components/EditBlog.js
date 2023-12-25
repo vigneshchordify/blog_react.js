@@ -1,17 +1,16 @@
+// EditBlog.js
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import instance from '../BaseUrl';
+import API from '../Api'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
 
-
 function EditBlog() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
@@ -21,22 +20,20 @@ function EditBlog() {
     resolver: yupResolver(schema),
   });
 
-  const [postState, setPostState] = useState({});
-  const { id } = useParams();
   const [singleBlogData, setSingleBlogData] = useState({
     title: '',
     description: '',
   });
 
+  const { id } = useParams();
+
   useEffect(() => {
     const fetchPost = async (postId) => {
       try {
-        const response = await instance.get(`/singleblog/${postId}`);
-        const data = response.data.post;
+        const data = await API.getSingleBlog(postId);
         setSingleBlogData(data);
       } catch (error) {
         console.error('Error fetching post:', error);
-
         toast.error('Error fetching post');
       }
     };
@@ -53,35 +50,25 @@ function EditBlog() {
           <form
             className='text-center mt-5'
             onSubmit={handleSubmit(async (data) => {
-              setPostState({
+              const postState = {
                 title: data.title,
                 description: data.description,
                 uuid: localStorage.getItem('uuid'),
                 token: localStorage.getItem('token'),
                 postId: id,
-              });
+              };
 
               try {
-                const registerResponse = await instance.post('/updateblog', postState);
-                console.log(registerResponse);
+                const response = await API.updateBlog(postState);
 
-
-                if (registerResponse.data.message == 'Post updated successfully') {
-
-                  toast.success(registerResponse.data.message);
+                if (response.message === 'Post updated successfully') {
+                  toast.success(response.message);
                   setTimeout(() => {
-                    navigate('/')
-
-                    navigate('/accounts')
-
-                  }, 2000)
-
-
+                    navigate('/accounts');
+                  }, 2000);
                 }
-              } catch (err) {
-                console.log(err);
-
-
+              } catch (error) {
+                console.log(error);
               }
             })}
           >
