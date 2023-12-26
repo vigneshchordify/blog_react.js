@@ -1,0 +1,28 @@
+.intro_div{
+    height: 30vh;
+
+}
+.intro_sub_left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.intro_sub{
+    background-image: url('https://i.postimg.cc/yNJFM2mZ/5180211.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.intro_sub2{
+    background-image: url('https://i.postimg.cc/1R0dt7TF/3125988.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+
+
+
+
+
+

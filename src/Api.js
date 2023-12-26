@@ -8,7 +8,7 @@ const API = {
       return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
-      throw error;
+  
     }
   },
   deleteBlog: async (id) => {
@@ -17,7 +17,7 @@ const API = {
       return response.data;
     } catch (error) {
       console.error('Error deleting post:', error);
-      throw error;
+ 
     }
   },
   getSingleBlog: async (postId) => {
@@ -26,7 +26,7 @@ const API = {
       return response.data.post;
     } catch (error) {
       console.error('Error fetching post:', error);
-      throw error;
+     
     }
   },
 
@@ -36,7 +36,7 @@ const API = {
       return response.data;
     } catch (error) {
       console.error('Error updating post:', error);
-      throw error;
+ 
     }
 }
 ,
@@ -46,7 +46,7 @@ getParticularBlogs: async (token, uuid) => {
       return response.data;
     } catch (error) {
       console.error('Error fetching particular blogs:', error);
-      throw error;
+    
     }
   },
 
@@ -56,7 +56,7 @@ getParticularBlogs: async (token, uuid) => {
       return response.data;
     } catch (error) {
       console.error('Error posting blog:', error);
-      throw error;
+     
     }
   }, 
   
@@ -66,7 +66,7 @@ getParticularBlogs: async (token, uuid) => {
       return response.data;
     } catch (error) {
       console.error('Error logging in:', error);
-      throw error;
+     
     }
   },
   
@@ -76,7 +76,7 @@ getParticularBlogs: async (token, uuid) => {
         return response.data;
       } catch (error) {
         console.error('Error registering user:', error);
-        throw error;
+      
       }
     }
     

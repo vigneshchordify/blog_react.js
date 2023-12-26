@@ -5,13 +5,14 @@ import { useForm } from 'react-hook-form'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import instance from '../BaseUrl';
-// Importing toastify module
+
 import { toast, ToastContainer } from "react-toastify";
-// Import toastify css file
+
 import "react-toastify/dist/ReactToastify.css";
 import AccountBlogCard from './AccountBlogCard';
 import { useNavigate } from 'react-router-dom';
 import API from '../Api';
+import Footer from './Footer';
 
 
 
@@ -80,12 +81,13 @@ const [token,setToken]=useState()
               title:data.title,
               description:data.description,
               uuid:localStorage.getItem('uuid'),
-              token:localStorage.getItem('token')
+              
             })  
+            token:localStorage.getItem('token')
             console.log(postState);
             try {
 
-              const registerresponse = await instance.post('/postblog', postState);
+              const registerresponse = await instance.post('/postblog', postState,{headers:{token}});
               console.log(registerresponse);
               if(registerresponse.data.message=='post added successfully'){
                 toast.success(registerresponse.data.message)
@@ -114,8 +116,10 @@ const [token,setToken]=useState()
           </form>
         </div>
         <AccountBlogCard particularblogs={particularblogs} />
+      
 
       </div>
+      <Footer/>
       <ToastContainer/>
     </>
   )

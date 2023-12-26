@@ -1,4 +1,4 @@
-// Postcard.js
+
 import React from 'react';
 import '../css/postcard.css';
 

@@ -8,6 +8,10 @@ import API from '../Api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import instance from '../BaseUrl';
+import Footer from './Footer';
+
+
 
 function EditBlog() {
   const navigate = useNavigate();
@@ -26,6 +30,7 @@ function EditBlog() {
   });
 
   const { id } = useParams();
+  const [token,setToken]=useState()
 
   useEffect(() => {
     const fetchPost = async (postId) => {
@@ -37,6 +42,8 @@ function EditBlog() {
         toast.error('Error fetching post');
       }
     };
+    setToken(localStorage.getItem('token'))
+
 
     fetchPost(id);
   }, [id]);
@@ -44,7 +51,7 @@ function EditBlog() {
   return (
     <>
       <Navbar />
-      <div className='post_container mt-5'>
+      <div className='post_container mt-5 me-5'>
         <h4 className='text-center'>Edit post here</h4>
         {singleBlogData && (
           <form
@@ -54,12 +61,17 @@ function EditBlog() {
                 title: data.title,
                 description: data.description,
                 uuid: localStorage.getItem('uuid'),
-                token: localStorage.getItem('token'),
+               
+               
+              
                 postId: id,
               };
+            
 
               try {
-                const response = await API.updateBlog(postState);
+             
+              
+                const response = await API.updateBlog(postState,{headers:{token}});
 
                 if (response.message === 'Post updated successfully') {
                   toast.success(response.message);
@@ -92,6 +104,7 @@ function EditBlog() {
           </form>
         )}
       </div>
+      <Footer/>
       <ToastContainer />
     </>
   );
